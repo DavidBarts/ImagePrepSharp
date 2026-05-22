@@ -35,7 +35,7 @@
             </NativeMenuItem>
             <NativeMenuItem Header="Help" IsVisible="true">
                 <NativeMenu>
-                    <NativeMenuItem Header="About…" IsVisible="{OnPlatform true, macOS=false}"  Command="{Binding AboutCommand}"/>
+                    <NativeMenuItem Header="About…" IsVisible="{OnPlatform true, macOS=false}" Command="{Binding AboutCommand}"/>
                     <NativeMenuItem Header="Help…" Command="{Binding HelpCommand}"/>
                 </NativeMenu>
             </NativeMenuItem>

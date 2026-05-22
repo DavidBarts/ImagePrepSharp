@@ -9,19 +9,19 @@ public partial class StandardViewModel : ViewModelBase
     public string Greeting { get; } = "Welcome to Avalonia!";
 
     [RelayCommand]
-    private void OpenScale()
+    public void OpenScale()
     {
         System.Console.WriteLine("OpenScale clicked.");
     }
 
     [RelayCommand]
-    private void Preferences()
+    public void Preferences()
     {
         System.Console.WriteLine("Preferences clicked.");
     }
 
     [RelayCommand]
-    private void Quit()
+    public void Quit()
     {
         System.Console.WriteLine("Quit clicked.");
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApp)
@@ -36,13 +36,13 @@ public partial class StandardViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void About()
+    public void About()
     {
         System.Console.WriteLine("About clicked.");
     }
 
     [RelayCommand]
-    private void Help()
+    public void Help()
     {
         System.Console.WriteLine("Help clicked.");
     }

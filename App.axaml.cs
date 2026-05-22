@@ -18,14 +18,26 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var standardViewModel = new StandardViewModel();
+        DataContext = standardViewModel;
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new StandardViewModel(),
+                DataContext = standardViewModel,
             };
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void AboutCommand(object? sender, System.EventArgs e)
+    {
+        ((StandardViewModel) DataContext).About();
+    }
+
+    private void PreferencesCommand(object? sender, System.EventArgs e)
+    {
+        ((StandardViewModel) DataContext).Preferences();
     }
 }
