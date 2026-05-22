@@ -15,7 +15,37 @@
         <vm:StandardViewModel/>
     </Design.DataContext>
 
+    <NativeMenu.Menu>
+        <NativeMenu>
+            <NativeMenuItem Header="File" IsVisible="true">
+                <NativeMenu>
+                    <NativeMenuItem Header="Open &amp; Scale" Gesture="{OnPlatform Ctrl+O, macOS=Meta+O}" IsEnabled="true" Command="{Binding OpenScaleCommand}"/>
+                    <NativeMenuItem Header="Discard" IsEnabled="false"/>
+                    <NativeMenuItem Header="Save &amp; Close" IsEnabled="false" Gesture="{OnPlatform Ctrl+S, macOS=Meta+S}"/>
+                    <OnPlatform>
+                        <OnPlatform.macOS>
+                            <NativeMenuItem Header="Preferences…" IsVisible="false" Gesture="Meta+," Command="{Binding PreferencesCommand}"/>
+                        </OnPlatform.macOS>
+                        <OnPlatform.Default>
+                            <NativeMenuItem Header="Preferences…" IsVisible="true" Gesture="Ctrl+," Command="{Binding PreferencesCommand}"/>
+                        </OnPlatform.Default>
+                    </OnPlatform>
+                    <NativeMenuItem Header="Quit" IsVisible="{OnPlatform true, macOS=false}" Gesture="{OnPlatform Ctrl+Q, macOS=Meta+Q}" Command="{Binding QuitCommand}"/>
+                </NativeMenu>
+            </NativeMenuItem>
+            <NativeMenuItem Header="Help" IsVisible="true">
+                <NativeMenu>
+                    <NativeMenuItem Header="About…" IsVisible="{OnPlatform true, macOS=false}"  Command="{Binding AboutCommand}"/>
+                    <NativeMenuItem Header="Help…" Command="{Binding HelpCommand}"/>
+                </NativeMenu>
+            </NativeMenuItem>
+        </NativeMenu>
+    </NativeMenu.Menu>
+
     <StackPanel>
+        <DockPanel>
+            <NativeMenuBar DockPanel.Dock="Top" />
+        </DockPanel>
         <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button HorizontalAlignment="Center">Test Button</Button>
     </StackPanel>
