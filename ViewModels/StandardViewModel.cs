@@ -1,6 +1,6 @@
 ﻿namespace ImagePrepSharp.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class StandardViewModel : ViewModelBase
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
 }
