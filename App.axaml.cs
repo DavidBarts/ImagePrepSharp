@@ -4,10 +4,10 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
-using GetStartedApp.ViewModels;
-using GetStartedApp.Views;
+using ImagePrepSharp.ViewModels;
+using ImagePrepSharp.Views;
 
-namespace GetStartedApp;
+namespace ImagePrepSharp;
 
 public partial class App : Application
 {

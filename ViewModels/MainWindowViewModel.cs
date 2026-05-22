@@ -1,4 +1,4 @@
-﻿namespace GetStartedApp.ViewModels;
+﻿namespace ImagePrepSharp.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {

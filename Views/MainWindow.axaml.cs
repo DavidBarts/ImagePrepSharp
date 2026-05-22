@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace GetStartedApp.Views;
+namespace ImagePrepSharp.Views;
 
 public partial class MainWindow : Window
 {
