@@ -13,8 +13,8 @@
 
     <NativeMenu.Menu>
         <NativeMenu>
-            <NativeMenuItem Header="About ImagePrepSharp…" Click="AboutCommand" />
-            <NativeMenuItem Header="Preferences…" Gesture="Meta+," Click="PreferencesCommand" />
+            <NativeMenuItem Header="About ImagePrepSharp…" Command="{Binding AboutCommand}" />
+            <NativeMenuItem Header="Preferences…" Gesture="Meta+," Command="{Binding PreferencesCommand}" />
         </NativeMenu>
     </NativeMenu.Menu>
 

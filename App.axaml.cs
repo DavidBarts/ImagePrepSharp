@@ -30,14 +30,4 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
-
-    private void AboutCommand(object? sender, System.EventArgs e)
-    {
-        ((StandardViewModel) DataContext).About();
-    }
-
-    private void PreferencesCommand(object? sender, System.EventArgs e)
-    {
-        ((StandardViewModel) DataContext).Preferences();
-    }
 }
