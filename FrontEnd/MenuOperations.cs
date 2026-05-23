@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
+using ImagePrepSharp.Data;
+
 namespace ImagePrepSharp.FrontEnd;
 
 // This can't be a ViewModel because some menu operations (e.g. those
@@ -32,6 +34,9 @@ static class MenuOperations
     public static void Preferences(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Preferences clicked.");
+        var settings = Settings.Instance;
+        System.Console.WriteLine($"Output suffix is {settings.OutputSuffix}.");
+        // settings.Save();
     }
 
     public static void Quit(object? sender, System.EventArgs eventArgs, Window? parent)
