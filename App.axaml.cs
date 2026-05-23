@@ -1,8 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using ImagePrepSharp.ViewModels;
-using ImagePrepSharp.Views;
+using ImagePrepSharp.FrontEnd;
 
 namespace ImagePrepSharp;
 
@@ -15,16 +14,22 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        var standardViewModel = new StandardViewModel();
-        DataContext = standardViewModel;
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = standardViewModel,
-            };
+            desktop.MainWindow = new MainWindow();
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    // See note in FrontEnd/StandardWindow.cs
+    private void About_OnClick(object? sender, System.EventArgs e)
+    {
+        MenuOperations.About(sender, e, null);
+    }
+
+    private void Preferences_OnClick(object? sender, System.EventArgs e)
+    {
+        MenuOperations.Preferences(sender, e, null);
     }
 }

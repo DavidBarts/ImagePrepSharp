@@ -1,8 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:ImagePrepSharp.ViewModels"
              x:Class="ImagePrepSharp.App"
-             x:DataType="vm:StandardViewModel"
              Name="ImagePrepSharp"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -13,8 +11,8 @@
 
     <NativeMenu.Menu>
         <NativeMenu>
-            <NativeMenuItem Header="About ImagePrepSharp…" Command="{Binding AboutCommand}" />
-            <NativeMenuItem Header="Preferences…" Gesture="Meta+," Command="{Binding PreferencesCommand}" />
+            <NativeMenuItem Header="About ImagePrepSharp…" Click="About_OnClick" />
+            <NativeMenuItem Header="Preferences…" Gesture="Meta+," Click="Preferences_OnClick" />
         </NativeMenu>
     </NativeMenu.Menu>
 
