@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.Input;
 
@@ -6,8 +6,6 @@ namespace ImagePrepSharp.ViewModels;
 
 public partial class StandardViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
-
     [RelayCommand]
     public void OpenScale()
     {

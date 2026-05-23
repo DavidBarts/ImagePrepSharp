@@ -7,6 +7,7 @@
         x:Class="ImagePrepSharp.Views.MainWindow"
         x:DataType="vm:StandardViewModel"
         Icon="/Assets/avalonia-logo.ico"
+        Width="512" Height="384"
         Title="ImagePrepSharp">
 
     <Design.DataContext>
@@ -42,12 +43,11 @@
         </NativeMenu>
     </NativeMenu.Menu>
 
-    <StackPanel>
+    <Grid>
         <DockPanel>
             <NativeMenuBar DockPanel.Dock="Top" />
         </DockPanel>
-        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button HorizontalAlignment="Center">Test Button</Button>
-    </StackPanel>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Drag image files into this window or choose File… Open &amp; Scale from menu.</TextBlock>
+    </Grid>
 
 </Window>
