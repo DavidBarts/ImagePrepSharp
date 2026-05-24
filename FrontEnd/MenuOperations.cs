@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -11,27 +12,27 @@ namespace ImagePrepSharp.FrontEnd;
 // M-V-VM pattern Avalonia pushes forbids that.
 static class MenuOperations
 {
-    public static void About(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task About(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("About clicked.");
     }
 
-    public static void Discard(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Discard(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Discard clicked.");
     }
 
-    public static void Help(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Help(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Help clicked.");
     }
 
-    public static void OpenScale(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task OpenScale(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("OpenScale clicked.");
     }
 
-    public static void Preferences(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Preferences(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Preferences clicked.");
         var settings = Settings.Instance;
@@ -39,7 +40,7 @@ static class MenuOperations
         // settings.Save();
     }
 
-    public static void Quit(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Quit(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Quit clicked.");
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApp)
@@ -53,7 +54,7 @@ static class MenuOperations
         }
     }
 
-    public static void SaveClose(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task SaveClose(object? sender, System.EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("SaveClose clicked.");
     }

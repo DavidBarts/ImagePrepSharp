@@ -23,13 +23,13 @@ public partial class App : Application
     }
 
     // See note in FrontEnd/StandardWindow.cs
-    private void About_OnClick(object? sender, System.EventArgs e)
+    private async void About_OnClick(object? sender, System.EventArgs e)
     {
-        MenuOperations.About(sender, e, null);
+        await MenuOperations.About(sender, e, null);
     }
 
-    private void Preferences_OnClick(object? sender, System.EventArgs e)
+    private async void Preferences_OnClick(object? sender, System.EventArgs e)
     {
-        MenuOperations.Preferences(sender, e, null);
+        await MenuOperations.Preferences(sender, e, null);
     }
 }
