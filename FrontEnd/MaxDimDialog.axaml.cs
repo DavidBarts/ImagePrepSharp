@@ -7,11 +7,6 @@ using ImagePrepSharp.Data;
 namespace ImagePrepSharp.FrontEnd;
 public partial class MaxDimDialog : Window
 {
-    public int Value {
-        get => MaxDimSpinner.Value;
-        set { MaxDimSpinner.Value = value; }
-    }
-
     public MaxDimDialog()
     {
         InitializeComponent();
@@ -24,10 +19,10 @@ public partial class MaxDimDialog : Window
 
     private void OK_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        Close(Value);
+        Close(MaxDimSpinner.Value);
     }
 
-    public async Task<int?> ShowModalAsync(Window parent)
+    public async Task<int?> ShowAsync(Window parent)
     {
         return await ShowDialog<int?>(parent);
     }

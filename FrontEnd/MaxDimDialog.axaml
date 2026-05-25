@@ -7,9 +7,9 @@
         WindowStartupLocation="CenterOwner"
         CanResize="False"
         ShowInTaskbar="False">
-    <Grid RowDefinitions="*,Auto" Margin="20">
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center">Specify the maximum dimension (in pixels) to scale the image to.</TextBlock>
-        <local:MaxDimSpinner Grid.Row="2" x:Name="MaxDimSpinner" />
+    <Grid RowDefinitions="*,Auto,Auto" Margin="20">
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center">Specify the maximum dimension (in pixels) to scale the image(s) to.</TextBlock>
+        <local:MaxDimSpinner Grid.Row="1" x:Name="MaxDimSpinner" HorizontalAlignment="Center" Margin="0,0,0,20" />
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     HorizontalAlignment="Right" Spacing="8">
             <Button Content="Cancel" Click="Cancel_Click" />

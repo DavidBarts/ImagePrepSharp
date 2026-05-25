@@ -10,6 +10,8 @@ public class MaxDimSpinner : ButtonSpinner
 
     private int index;
 
+    protected override Type StyleKeyOverride => typeof(ButtonSpinner);
+
     public int Value {
         get => DIMENSIONS[index];
         set {

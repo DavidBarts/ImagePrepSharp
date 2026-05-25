@@ -49,9 +49,13 @@ static class MenuOperations
         }
         foreach (var file in files)
         {
-            System.Console.WriteLine(file.Path);
+            System.Console.WriteLine(file.Path.AbsolutePath);
         }
-        var maxDim = await (new MaxDimDialog()).ShowModalAsync(parent!);
+        var maxDim = await (new MaxDimDialog()).ShowAsync(parent!);
+        if (maxDim == null)
+        {
+            return;  // user cancelled it
+        }
         System.Console.WriteLine($"maxDimension = {maxDim}");  /* debug */
     }
 
