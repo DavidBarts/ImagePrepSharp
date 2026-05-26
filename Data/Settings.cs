@@ -10,7 +10,7 @@ using System.Text.Json;
 // to get slow and freezy.
 public class Settings
 {
-    private static readonly string FILE_NAME = Path.Join(Files.DIRECTORY, "settings.json");
+    public static readonly string FILE_NAME = Path.Join(Files.DIRECTORY, "settings.json");
     private static readonly Settings _instance = GetSettings();
 
     public string OutputSuffix { get; set; } = "_scaled";

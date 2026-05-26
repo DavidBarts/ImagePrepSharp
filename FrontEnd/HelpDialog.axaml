@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ImagePrepSharp.FrontEnd.HelpDialog"
+        Title="ImagePrepSharp Help"
+        Width="400" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="10" Margin="20">
+        <SelectableTextBlock HorizontalAlignment="Left" TextWrapping="Wrap" LineHeight="14">
+            <SelectableTextBlock.Styles>
+                <Style Selector="Run.Header">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontSize" Value="18" />
+                </Style>
+                <Style Selector="Run.Subheader">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontSize" Value="14" />
+                </Style>
+            </SelectableTextBlock.Styles>
+            <Run Classes="Header">Using This Program</Run>
+            <LineBreak /> <LineBreak />
+            1. Open the image using File… Open &amp; Scale. As this command's name implies, it will also scale the file to a maximum of 640 (or whatever the defined maximum is) pixels in either dimension, preserving its aspect ratio.
+            <LineBreak /> <LineBreak />
+            2. Rotate the image as needed.
+            <LineBreak /> <LineBreak />
+            3. Either write out the file and close it using File… Save &amp; Close, or discard your edits using File… Discard.
+            <LineBreak /> <LineBreak />
+            <Run Classes="Subheader">Configuration File</Run>
+            <LineBreak /> <LineBreak />
+            <Run x:Name="ConfigFilePath" />
+        </SelectableTextBlock>
+     </StackPanel>
+</Window>

@@ -13,6 +13,7 @@ public partial class SettingsDialog : Window
     {
         InitializeComponent();
         ResetValues();
+        Closing += OnClosing;
     }
 
     private void ResetValues()
@@ -75,7 +76,7 @@ public partial class SettingsDialog : Window
         OutputTo.Text = folders[0].Path.AbsolutePath;
     }
 
-    private async void OnClosing(object sender, WindowClosingEventArgs e)
+    private async void OnClosing(object? sender, WindowClosingEventArgs e)
     {
         e.Cancel = true;  // never close, because we reuse this one
         if (Changed())

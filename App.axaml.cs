@@ -17,6 +17,7 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow();
+            desktop.ShutdownRequested += OnShutdown;
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -31,5 +32,10 @@ public partial class App : Application
     private async void Preferences_OnClick(object? sender, System.EventArgs e)
     {
         await MenuOperations.Preferences(sender, e, null);
+    }
+
+    protected virtual void OnShutdown(object? sender, ShutdownRequestedEventArgs e)
+    {
+        System.Environment.Exit(0);
     }
 }

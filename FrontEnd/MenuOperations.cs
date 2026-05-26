@@ -21,10 +21,12 @@ namespace ImagePrepSharp.FrontEnd;
 static class MenuOperations
 {
     private static readonly SettingsDialog settingsDialog = new();
+    private static readonly AboutDialog aboutDialog = new();
+    private static readonly HelpDialog helpDialog = new();
 
     public static async Task About(object? sender, EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("About clicked.");
+        aboutDialog.Show();
     }
 
     public static async Task Discard(object? sender, EventArgs eventArgs, Window? parent)
@@ -38,7 +40,7 @@ static class MenuOperations
 
     public static async Task Help(object? sender, EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("Help clicked.");
+        helpDialog.Show();
     }
 
     public static async Task OpenScale(object? sender, EventArgs eventArgs, Window? parent)
