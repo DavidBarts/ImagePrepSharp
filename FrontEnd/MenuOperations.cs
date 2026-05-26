@@ -20,6 +20,8 @@ namespace ImagePrepSharp.FrontEnd;
 // M-V-VM pattern Avalonia pushes forbids that.
 static class MenuOperations
 {
+    private static readonly SettingsDialog settingsDialog = new();
+
     public static async Task About(object? sender, EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("About clicked.");
@@ -87,10 +89,7 @@ static class MenuOperations
 
     public static async Task Preferences(object? sender, EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("Preferences clicked.");
-        var settings = Settings.Instance;
-        System.Console.WriteLine($"Output suffix is {settings.OutputSuffix}.");
-        // settings.Save();
+        settingsDialog.Show();
     }
 
     public static async Task Quit(object? sender, EventArgs eventArgs, Window? parent)

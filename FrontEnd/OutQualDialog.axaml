@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:ImagePrepSharp.FrontEnd"
         x:Class="ImagePrepSharp.FrontEnd.OutQualDialog"
         Title="Specify Output Quality"
         Width="400" Height="200"
@@ -9,8 +10,7 @@
     <Grid RowDefinitions="*,Auto,Auto" Margin="20">
         <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center">Specify the output quality.</TextBlock>
         <!-- Default value for NumericUpDown set in code-behind. -->
-        <NumericUpDown Grid.Row="1" x:Name="OutQualSpinner" Minimum="1"
-            Maximum="100" FormatString="F0" HorizontalAlignment="Center" Margin="0,0,0,20" />
+        <local:OutQualSpinner Grid.Row="1" x:Name="OutQualSpinner"  HorizontalAlignment="Center" Margin="0,0,0,20" />
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     HorizontalAlignment="Right" Spacing="8">
             <Button Content="Cancel" Click="Cancel_Click" />

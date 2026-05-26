@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:ImagePrepSharp.FrontEnd"
+        x:Class="ImagePrepSharp.FrontEnd.SettingsDialog"
+        Title="Settings"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="10" Margin="20">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
+            <TextBlock VerticalAlignment="Center">Default maximum dimension:</TextBlock>
+            <local:MaxDimSpinner x:Name="MaxDimension" VerticalAlignment="Center" />
+            <TextBlock VerticalAlignment="Center">&#160;&#160;Default output quality:</TextBlock>
+            <local:OutQualSpinner x:Name="OutputQuality" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10" HorizontalAlignment="Stretch">
+            <TextBlock VerticalAlignment="Center">Output filename suffix:</TextBlock>
+            <TextBox x:Name="OutputSuffix" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+            <RadioButton GroupName="OutputWhere" x:Name="OutputToInputDir" Content="Create output file in same folder as input." />
+            <RadioButton GroupName="OutputWhere" x:Name="CreateOutputIn" Content="Create output file in:" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBox x:Name="OutputTo" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                <Button Content="Change" Click="Change_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
+            <TextBlock VerticalAlignment="Center">Default output file type:</TextBlock>
+            <RadioButton GroupName="OutputType" x:Name="OutputTypeJpeg" Content="JPEG" />
+            <RadioButton GroupName="OutputType" x:Name="OutputTypeWebp" Content="WebP" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right" Spacing="8">
+            <Button Content="Cancel" Click="Cancel_Click" />
+            <Button Content="Save" Click="Save_Click" />
+        </StackPanel>
+    </StackPanel>
+</Window>
