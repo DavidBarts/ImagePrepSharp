@@ -36,6 +36,7 @@ public class BackEndImage : IDisposable
         }
     }
 
+    // this one should also strip metadata, if needed to produce clean output
     public async Task<BackEndImage> ScaleMapColorAsync(int maxDimension)
     {
         AssertLoaded();
@@ -58,8 +59,22 @@ public class BackEndImage : IDisposable
                 Log.Information("Transforming color space to sRGB.");
                 image.TransformColorSpace(ColorProfiles.SRGB);
             }
+            StripMetadata();
         });
         return this;
+    }
+
+    private void StripMetadata()
+    {
+        var exifProfile = image!.GetExifProfile();
+        if (exifProfile != null)
+            image.RemoveProfile(exifProfile);
+        var iptcProfile = image.GetIptcProfile();
+        if (iptcProfile != null)
+            image.RemoveProfile(iptcProfile);
+        var xmpProfile = image.GetXmpProfile();
+        if (xmpProfile != null)
+            image.RemoveProfile(xmpProfile);
     }
 
     public async Task<BackEndImage> RotateAsync(int degrees)

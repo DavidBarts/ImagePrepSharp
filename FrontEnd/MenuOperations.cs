@@ -11,6 +11,7 @@ using Serilog;
 
 using ImagePrepSharp.BackEnd;
 using ImagePrepSharp.Data;
+using System.IO;
 
 namespace ImagePrepSharp.FrontEnd;
 
@@ -19,22 +20,26 @@ namespace ImagePrepSharp.FrontEnd;
 // M-V-VM pattern Avalonia pushes forbids that.
 static class MenuOperations
 {
-    public static async Task About(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task About(object? sender, EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("About clicked.");
     }
 
-    public static async Task Discard(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Discard(object? sender, EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("Discard clicked.");
+        if (parent is not RotateWindow rotateWindow)
+        {
+            throw new ArgumentException("Unexpected parent type.");
+        }
+        rotateWindow.Close();
     }
 
-    public static async Task Help(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Help(object? sender, EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Help clicked.");
     }
 
-    public static async Task OpenScale(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task OpenScale(object? sender, EventArgs eventArgs, Window? parent)
     {
         var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
         var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions {
@@ -52,7 +57,7 @@ static class MenuOperations
         {
             return;  // nothing selected by user
         }
-        var maxDim = await (new MaxDimDialog()).ShowAsync(parent!);
+        var maxDim = await new MaxDimDialog().ShowAsync(parent!);
         if (maxDim == null)
         {
             return;  // user cancelled it
@@ -76,11 +81,11 @@ static class MenuOperations
                 await errorDialog.ShowWindowDialogAsync(parent!);
                 continue;
             }
-            new RotateWindow(image!) { Title = file.Name }{.Show(parent!);
+            new RotateWindow(file, image!).Show(parent!);
         }
     }
 
-    public static async Task Preferences(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Preferences(object? sender, EventArgs eventArgs, Window? parent)
     {
         System.Console.WriteLine("Preferences clicked.");
         var settings = Settings.Instance;
@@ -88,9 +93,8 @@ static class MenuOperations
         // settings.Save();
     }
 
-    public static async Task Quit(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task Quit(object? sender, EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("Quit clicked.");
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApp)
         {
             desktopApp.Shutdown();
@@ -102,22 +106,35 @@ static class MenuOperations
         }
     }
 
-    public static async Task SaveClose(object? sender, System.EventArgs eventArgs, Window? parent)
+    public static async Task SaveClose(object? sender, EventArgs eventArgs, Window? parent)
     {
         if (parent is not RotateWindow rotateWindow)
         {
             throw new ArgumentException("Unexpected parent type.");
         }
         var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
-        var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { });
+        var settings = Settings.Instance;
+        var defaultExtension = settings.OutputType.ToString().ToLowerInvariant();
+        var defaultDirectory = settings.OutputToInputDir ? Path.GetDirectoryName(rotateWindow.File.Path.AbsolutePath) ?? Path.DirectorySeparatorChar.ToString() : settings.OutputTo;
+        var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            DefaultExtension = defaultExtension,
+            SuggestedFileName = Path.GetFileNameWithoutExtension(rotateWindow.File.Name) + settings.OutputSuffix + "." + defaultExtension,
+            SuggestedStartLocation = await storageProvider.TryGetFolderFromPathAsync(defaultDirectory)
+        });
         if (file == null)
         {
             return;  // user cancelled
         }
-        var quality = 85; // TODO: get from user
+        var quality = await new OutQualDialog().ShowAsync(parent!);
+        if (quality == null)
+        {
+            return; // user cancelled
+        }
         try
         {
-            await rotateWindow.Image.SaveAsync(file.Path.AbsolutePath, quality);
+            await rotateWindow.Image.SaveAsync(file.Path.AbsolutePath, (int) quality);
+            rotateWindow.Close();
         }
         catch (Exception e)
         {

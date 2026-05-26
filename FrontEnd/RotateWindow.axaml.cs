@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using ImagePrepSharp.BackEnd;
 
 namespace ImagePrepSharp.FrontEnd;
@@ -7,11 +9,14 @@ namespace ImagePrepSharp.FrontEnd;
 public partial class RotateWindow : StandardWindow
 {
     public BackEndImage Image {get; private set;}
+    public IStorageFile File {get; private set;}
 
-    public RotateWindow(BackEndImage image)
+    public RotateWindow(IStorageFile file, BackEndImage image)
     {
         InitializeComponent();
+        File = file;
         Image = image;
+        Title = File.Name;
         ImageScroller.MaxWidth = (Screens.Primary?.WorkingArea.Width ?? 1024) * 3 / 4;
         ImageScroller.MaxHeight = (Screens.Primary?.WorkingArea.Height ?? 768) * 3 / 4;
         ImageDisplay.Source = image.ToBitmap();
@@ -43,5 +48,11 @@ public partial class RotateWindow : StandardWindow
         }
         Image.DisposeIfDifferentFrom(rotated);
         Image = rotated;
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        base.OnClosing(e);
+        Image.Dispose();
     }
 }

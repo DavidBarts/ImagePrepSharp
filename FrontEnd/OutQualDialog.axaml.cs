@@ -19,7 +19,7 @@ public partial class OutQualDialog : Window
 
     private void OK_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        Close(OutQualSpinner.Value);
+        Close((int?) OutQualSpinner.Value);
     }
 
     public async Task<int?> ShowAsync(Window parent)
