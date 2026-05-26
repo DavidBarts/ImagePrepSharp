@@ -36,6 +36,8 @@ public partial class App : Application
 
     protected virtual void OnShutdown(object? sender, ShutdownRequestedEventArgs e)
     {
+        // XXX - For some reason it sits there w/o exiting sometimes unless
+        // this is here. Probably an ugly fix.
         System.Environment.Exit(0);
     }
 }
