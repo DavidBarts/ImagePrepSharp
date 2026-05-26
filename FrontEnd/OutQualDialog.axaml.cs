@@ -1,12 +1,15 @@
 using System.Threading.Tasks;
 using Avalonia.Controls;
 
+using ImagePrepSharp.Data;
+
 namespace ImagePrepSharp.FrontEnd;
-public partial class MaxDimDialog : Window
+public partial class OutQualDialog : Window
 {
-    public MaxDimDialog()
+    public OutQualDialog()
     {
         InitializeComponent();
+        OutQualSpinner.Value = Settings.Instance.OutputQuality;
     }
 
     private void Cancel_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -16,7 +19,7 @@ public partial class MaxDimDialog : Window
 
     private void OK_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        Close(MaxDimSpinner.Value);
+        Close(OutQualSpinner.Value);
     }
 
     public async Task<int?> ShowAsync(Window parent)

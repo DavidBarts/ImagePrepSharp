@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ImagePrepSharp.FrontEnd.RotateWindow"
+        Title="Untitled"
+        Width="640" Height="480"
+        WindowStartupLocation="CenterOwner"
+        CanResize="True"
+        ShowInTaskbar="False">
+
+    <NativeMenu.Menu>
+        <NativeMenu>
+            <NativeMenuItem Header="File" IsVisible="true">
+                <NativeMenu>
+                    <NativeMenuItem Header="Open &amp; Scale" Gesture="{OnPlatform Ctrl+O, macOS=Meta+O}" IsEnabled="true" Click="OpenScale_OnClick" />
+                    <NativeMenuItem Header="Discard" IsEnabled="true" Click="Discard_OnClick" />
+                    <NativeMenuItem Header="Save &amp; Close" IsEnabled="true" Gesture="{OnPlatform Ctrl+S, macOS=Meta+S}" Click="SaveClose_OnClick"/>
+                    <OnPlatform>
+                        <OnPlatform.macOS>
+                            <NativeMenuItem Header="Preferences…" IsVisible="false" Gesture="Meta+," Click="Preferences_OnClick"/>
+                        </OnPlatform.macOS>
+                        <OnPlatform.Default>
+                            <NativeMenuItem Header="Preferences…" IsVisible="true" Gesture="Ctrl+," Click="Preferences_OnClick"/>
+                        </OnPlatform.Default>
+                    </OnPlatform>
+                    <NativeMenuItem Header="Quit" IsVisible="{OnPlatform true, macOS=false}" Gesture="{OnPlatform Ctrl+Q, macOS=Meta+Q}" Click="Quit_OnClick"/>
+                </NativeMenu>
+            </NativeMenuItem>
+            <NativeMenuItem Header="Help" IsVisible="true">
+                <NativeMenu>
+                    <NativeMenuItem Header="About…" IsVisible="{OnPlatform true, macOS=false}" Click="About_OnClick"/>
+                    <NativeMenuItem Header="Help…" Click="Help_OnClick"/>
+                </NativeMenu>
+            </NativeMenuItem>
+        </NativeMenu>
+    </NativeMenu.Menu>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollViewer x:Name="ImageScroller" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Image Grid.Row="0" x:Name="ImageDisplay" Stretch="None" />
+        </ScrollViewer>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="50">
+            <TextBlock Text="Rotate:" VerticalAlignment="Center" />
+            <Button Content="90˚ CW" Click="Rotate90CW_Click" VerticalAlignment="Center" />
+            <Button Content="180˚" Click="Rotate180_Click" VerticalAlignment="Center" />
+            <Button Content="90˚ CCW" Click="Rotate90CCW_Click" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>

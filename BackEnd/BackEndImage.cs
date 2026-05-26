@@ -1,0 +1,102 @@
+using System;
+using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
+using ImageMagick;
+using Serilog;
+
+namespace ImagePrepSharp.BackEnd;
+
+// Tightly coupled to our needs; definitely not general-purpose.
+public class BackEndImage : IDisposable
+{
+    private MagickImage? image;
+
+    public BackEndImage()
+    {
+        image = null;
+    }
+
+    public async Task LoadAsync(string fileName)
+    {
+        if (image != null)
+        {
+            throw new InvalidOperationException("Image has already been loaded.");
+        }
+        Log.Information("Opening {fileName}.", fileName);
+        image = await Task.Run(async delegate {
+            return new MagickImage(fileName);
+        });
+    }
+
+    private void AssertLoaded()
+    {
+        if (image == null)
+        {
+            throw new InvalidOperationException("Image has not been loaded.");
+        }
+    }
+
+    public async Task<BackEndImage> ScaleMapColorAsync(int maxDimension)
+    {
+        AssertLoaded();
+        await Task.Run(async delegate {
+            var imageMaxDimension = uint.Max(image!.Width, image.Height);
+            if (imageMaxDimension > maxDimension)
+            {
+                Log.Information("Resizing.");
+                var ratio = (double) maxDimension / (double) imageMaxDimension;
+                image.Resize((uint) (image.Width * ratio), (uint) (image.Height * ratio), FilterType.Lanczos);
+            }
+            var colorProfile = image.GetColorProfile();
+            if (colorProfile == null)
+            {
+                Log.Information("No color profile, assuming sRGB.");
+                image.SetProfile(ColorProfiles.SRGB);
+            }
+            else if (colorProfile != ColorProfiles.SRGB)
+            {
+                Log.Information("Transforming color space to sRGB.");
+                image.TransformColorSpace(ColorProfiles.SRGB);
+            }
+        });
+        return this;
+    }
+
+    public async Task<BackEndImage> RotateAsync(int degrees)
+    {
+        AssertLoaded();
+        await Task.Run(async delegate {
+            image!.Rotate(degrees);
+        });
+        return this;
+    }
+
+    public async Task SaveAsync(string fileName, int quality)
+    {
+        AssertLoaded();
+        Log.Information("Saving as {fileName}.", fileName);
+        await Task.Run(async delegate {
+            image!.Quality = (uint) quality;
+            image.Write(fileName);
+        });
+    }
+
+    public void Dispose()
+    {
+        image?.Dispose();
+    }
+
+    public void DisposeIfDifferentFrom(BackEndImage other)
+    {
+        if (this != other)
+        {
+            Dispose();
+        }
+    }
+
+    public Bitmap ToBitmap()
+    {
+        AssertLoaded();
+        return image!.ToWriteableBitmap();
+    }
+}

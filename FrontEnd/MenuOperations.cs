@@ -1,9 +1,15 @@
+using System;
 using System.Threading.Tasks;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
+using Serilog;
 
+using ImagePrepSharp.BackEnd;
 using ImagePrepSharp.Data;
 
 namespace ImagePrepSharp.FrontEnd;
@@ -30,7 +36,6 @@ static class MenuOperations
 
     public static async Task OpenScale(object? sender, System.EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("OpenScale clicked.");  /* debug */
         var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
         var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions {
             Title = "Open Image File",
@@ -47,16 +52,32 @@ static class MenuOperations
         {
             return;  // nothing selected by user
         }
-        foreach (var file in files)
-        {
-            System.Console.WriteLine(file.Path.AbsolutePath);
-        }
         var maxDim = await (new MaxDimDialog()).ShowAsync(parent!);
         if (maxDim == null)
         {
             return;  // user cancelled it
         }
-        System.Console.WriteLine($"maxDimension = {maxDim}");  /* debug */
+        foreach (var file in files)
+        {
+            BackEndImage? image = null;
+            try
+            {
+                image = new BackEndImage();
+                await image.LoadAsync(file.Path.AbsolutePath);
+                var scaled = await image.ScaleMapColorAsync((int) maxDim);
+                image.DisposeIfDifferentFrom(scaled);
+                image = scaled;
+            }
+            catch (Exception e)
+            {
+                var message = $"Unable to load {file.Name}.";
+                Log.Error(e, message);
+                var errorDialog = MessageBoxManager.GetMessageBoxStandard("Error", message, ButtonEnum.Ok);
+                await errorDialog.ShowWindowDialogAsync(parent!);
+                continue;
+            }
+            new RotateWindow(image!) { Title = file.Name }{.Show(parent!);
+        }
     }
 
     public static async Task Preferences(object? sender, System.EventArgs eventArgs, Window? parent)
@@ -83,6 +104,27 @@ static class MenuOperations
 
     public static async Task SaveClose(object? sender, System.EventArgs eventArgs, Window? parent)
     {
-        System.Console.WriteLine("SaveClose clicked.");
+        if (parent is not RotateWindow rotateWindow)
+        {
+            throw new ArgumentException("Unexpected parent type.");
+        }
+        var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
+        var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { });
+        if (file == null)
+        {
+            return;  // user cancelled
+        }
+        var quality = 85; // TODO: get from user
+        try
+        {
+            await rotateWindow.Image.SaveAsync(file.Path.AbsolutePath, quality);
+        }
+        catch (Exception e)
+        {
+            var message = $"Unable to save as {file.Name}.";
+            Log.Error(e, message);
+            var errorDialog = MessageBoxManager.GetMessageBoxStandard("Error", message, ButtonEnum.Ok);
+            await errorDialog.ShowWindowDialogAsync(parent);
+        }
     }
 }
