@@ -10,10 +10,24 @@ namespace ImagePrepSharp.BackEnd;
 public class BackEndImage : IDisposable
 {
     private MagickImage? image;
+    private string? path;
+
+    public int Width { get => (int) image!.Width; }
+    public int Height { get => (int) image!.Height; }
+    public string Path {
+        get {
+            if (path == null)
+            {
+                throw new InvalidOperationException("Image has not been loaded.");
+            }
+            return path;
+        }
+    }
 
     public BackEndImage()
     {
         image = null;
+        path = null;
     }
 
     public async Task LoadAsync(string fileName)
@@ -23,6 +37,7 @@ public class BackEndImage : IDisposable
             throw new InvalidOperationException("Image has already been loaded.");
         }
         Log.Information("Opening {fileName}.", fileName);
+        path = System.IO.Path.GetFullPath(fileName);
         image = await Task.Run(async delegate {
             return new MagickImage(fileName);
         });

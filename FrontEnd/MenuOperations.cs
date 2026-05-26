@@ -81,7 +81,7 @@ static class MenuOperations
                 await errorDialog.ShowWindowDialogAsync(parent!);
                 continue;
             }
-            new RotateWindow(file, image!).Show(parent!);
+            new RotateWindow(image!).Show(parent!);
         }
     }
 
@@ -115,11 +115,12 @@ static class MenuOperations
         var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
         var settings = Settings.Instance;
         var defaultExtension = settings.OutputType.ToString().ToLowerInvariant();
-        var defaultDirectory = settings.OutputToInputDir ? Path.GetDirectoryName(rotateWindow.File.Path.AbsolutePath) ?? Path.DirectorySeparatorChar.ToString() : settings.OutputTo;
+        var outputSuffix = settings.OutputSuffix.Contains('{') ? String.Format(settings.OutputSuffix, rotateWindow.Image.Width, rotateWindow.Image.Height) : settings.OutputSuffix;
+        var defaultDirectory = settings.OutputToInputDir ? Path.GetDirectoryName(rotateWindow.Image.Path) ?? Path.DirectorySeparatorChar.ToString() : settings.OutputTo;
         var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
         {
             DefaultExtension = defaultExtension,
-            SuggestedFileName = Path.GetFileNameWithoutExtension(rotateWindow.File.Name) + settings.OutputSuffix + "." + defaultExtension,
+            SuggestedFileName = Path.GetFileNameWithoutExtension(rotateWindow.Image.Path) + outputSuffix + "." + defaultExtension,
             SuggestedStartLocation = await storageProvider.TryGetFolderFromPathAsync(defaultDirectory)
         });
         if (file == null)

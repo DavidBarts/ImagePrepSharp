@@ -9,14 +9,12 @@ namespace ImagePrepSharp.FrontEnd;
 public partial class RotateWindow : StandardWindow
 {
     public BackEndImage Image {get; private set;}
-    public IStorageFile File {get; private set;}
 
-    public RotateWindow(IStorageFile file, BackEndImage image)
+    public RotateWindow(BackEndImage image)
     {
         InitializeComponent();
-        File = file;
         Image = image;
-        Title = File.Name;
+        Title = System.IO.Path.GetFileName(image.Path);
         ImageScroller.MaxWidth = (Screens.Primary?.WorkingArea.Width ?? 1024) * 3 / 4;
         ImageScroller.MaxHeight = (Screens.Primary?.WorkingArea.Height ?? 768) * 3 / 4;
         ImageDisplay.Source = image.ToBitmap();
