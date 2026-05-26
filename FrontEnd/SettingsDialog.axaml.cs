@@ -66,7 +66,7 @@ public partial class SettingsDialog : Window
         var folders = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
             AllowMultiple = false,
-            SuggestedStartLocation = await storageProvider.TryGetFolderFromPathAsync(Files.HOME)
+            SuggestedStartLocation = await storageProvider.TryGetFolderFromPathAsync(OutputTo.Text!)
         });
         if (folders.Count < 1)
         {

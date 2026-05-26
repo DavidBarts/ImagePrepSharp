@@ -15,17 +15,17 @@
             <TextBlock VerticalAlignment="Center">&#160;&#160;Default output quality:</TextBlock>
             <local:OutQualSpinner x:Name="OutputQuality" VerticalAlignment="Center" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10" HorizontalAlignment="Stretch">
-            <TextBlock VerticalAlignment="Center">Output filename suffix:</TextBlock>
-            <TextBox x:Name="OutputSuffix" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" />
-        </StackPanel>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" ColumnSpacing="10" HorizontalAlignment="Stretch">
+            <TextBlock Grid.Column="0" VerticalAlignment="Center">Output filename suffix:</TextBlock>
+            <TextBox Grid.Column="1" x:Name="OutputSuffix" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" />
+        </Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
             <RadioButton GroupName="OutputWhere" x:Name="OutputToInputDir" Content="Create output file in same folder as input." />
             <RadioButton GroupName="OutputWhere" x:Name="CreateOutputIn" Content="Create output file in:" />
-            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,10,0,0" HorizontalAlignment="Stretch">
-                <TextBox x:Name="OutputTo" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" IsReadOnly="True" />
-                <Button Content="Change" Click="Change_Click"/>
-            </StackPanel>
+            <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto" ColumnSpacing="10" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBox Grid.Column="0" x:Name="OutputTo" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                <Button Grid.Column="1" Content="Change" Click="Change_Click"/>
+            </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
             <TextBlock VerticalAlignment="Center">Default output file type:</TextBlock>
