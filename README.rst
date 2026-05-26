@@ -1,6 +1,8 @@
 ImagePrepSharp
 ==============
 
+**NOTE:** This project is very much a work in progress right now.
+
 This is a C#/Avalonia port of the ImagePrep utility I wrote in Kotlin in
 2020, whose source code is self-hosted elsewhere (I will not link it
 here because abusive crawling from AI bots has crashed my site more than
@@ -15,7 +17,7 @@ box, and in their capability to deal with large files.  And there is no
 good alternative; there is nothing comparable to Python’s
 `Pillow <https://pillow.readthedocs.io/en/stable/>`_ or .NET’s
 `Magick.NET <https://github.com/dlemstra/Magick.NET>`_ for the JVM. What’s
-there is either geared twoards strange specialty purposes, an expensive
+there is either geared towards strange specialty purposes, an expensive
 proprietary product, limited in functionality, abandonware, or some
 combination of the above. I know, I’ve looked.
 
