@@ -76,6 +76,9 @@ it did not seem worthwhile.
 
 A number of settings control the default operation of this program;
 these may be adjusted via a settings dialog brought up via the top menu.
+Of particular note here is that the output suffix can contain ``{0}``
+and ``{1}`` sequences, which will be replaced by the width and height
+of the image respectively.
 
 Why Not MVVM?
 -------------
