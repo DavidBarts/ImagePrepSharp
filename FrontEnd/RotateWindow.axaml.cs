@@ -77,5 +77,10 @@ public partial class RotateWindow : StandardWindow
     {
         base.OnClosing(e);
         Image.Dispose();
+        var displayed = ImageDisplay.Source;
+        if (displayed is IDisposable disp)
+        {
+            disp.Dispose();
+        }
     }
 }
