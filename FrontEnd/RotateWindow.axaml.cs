@@ -21,6 +21,7 @@ public partial class RotateWindow : StandardWindow
         ImageScroller.MaxWidth = (Screens.Primary?.WorkingArea.Width ?? 1024) * 3 / 4;
         ImageScroller.MaxHeight = (Screens.Primary?.WorkingArea.Height ?? 768) * 3 / 4;
         ImageDisplay.Source = image.ToBitmap();
+        Closing += OnClosing;
     }
 
     public static async Task ShowForStorageItemAsync(IStorageItem item, int maxDim, Window parent)
@@ -73,9 +74,8 @@ public partial class RotateWindow : StandardWindow
         Image = rotated;
     }
 
-    protected override void OnClosing(WindowClosingEventArgs e)
+    protected void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        base.OnClosing(e);
         Image.Dispose();
         var displayed = ImageDisplay.Source;
         if (displayed is IDisposable disp)
