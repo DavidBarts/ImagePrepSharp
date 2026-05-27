@@ -23,7 +23,7 @@ public partial class MainWindow : StandardWindow
         if (e.DataTransfer.Formats.Contains(DataFormat.File))
         {
             var files = e.DataTransfer.TryGetFiles();
-            if (files != null)
+            if (files != null && files.Length > 0)
             {
                 var maxDim = (await new MaxDimDialog().ShowAsync(this)) ?? Settings.Instance.MaxDimension;
                 foreach (var file in files)
