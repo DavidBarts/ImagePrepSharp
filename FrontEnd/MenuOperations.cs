@@ -9,7 +9,6 @@ using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Serilog;
 
-using ImagePrepSharp.BackEnd;
 using ImagePrepSharp.Data;
 using System.IO;
 
@@ -68,24 +67,7 @@ static class MenuOperations
         }
         foreach (var file in files)
         {
-            BackEndImage? image = null;
-            try
-            {
-                image = new BackEndImage();
-                await image.LoadAsync(file.Path.AbsolutePath);
-                var scaled = await image.ScaleMapColorAsync((int) maxDim);
-                image.DisposeIfDifferentFrom(scaled);
-                image = scaled;
-            }
-            catch (Exception e)
-            {
-                var message = $"Unable to load {file.Name}.";
-                Log.Error(e, message);
-                var errorDialog = MessageBoxManager.GetMessageBoxStandard("Error", message, ButtonEnum.Ok);
-                await errorDialog.ShowWindowDialogAsync(parent!);
-                continue;
-            }
-            new RotateWindow(image!).Show(parent!);
+            await RotateWindow.ShowForStorageItemAsync(file, (int) maxDim, parent!);
         }
     }
 

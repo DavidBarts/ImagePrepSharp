@@ -6,6 +6,7 @@
         x:Class="ImagePrepSharp.FrontEnd.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Width="512" Height="384"
+        DragDrop.AllowDrop="True" DragDrop.Drop="OnDrop"
         Title="ImagePrepSharp">
 
     <NativeMenu.Menu>
