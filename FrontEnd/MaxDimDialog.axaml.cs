@@ -4,6 +4,12 @@ using Avalonia.Controls;
 namespace ImagePrepSharp.FrontEnd;
 public partial class MaxDimDialog : Window
 {
+    public bool AllowCancel
+    {
+        get => CancelButton.IsVisible;
+        set { CancelButton.IsVisible = value; }
+    }
+
     public MaxDimDialog()
     {
         InitializeComponent();

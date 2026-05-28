@@ -56,7 +56,7 @@ public partial class App : Application
     private async void OpenFilesFromArgs(Window parent, string[] fileNames)
     {
         var storageProvider = TopLevel.GetTopLevel(parent)?.StorageProvider!;
-        var maxDim = (await new MaxDimDialog().ShowAsync(parent)) ?? Settings.Instance.MaxDimension;
+        var maxDim = (await new MaxDimDialog { AllowCancel=false }.ShowAsync(parent)) ?? Settings.Instance.MaxDimension;
         foreach (var file in fileNames)
         {
             var fileItem = await storageProvider.TryGetFileFromPathAsync(
@@ -71,7 +71,7 @@ public partial class App : Application
         {
             return;
         }
-        var maxDim = (await new MaxDimDialog().ShowAsync(main)) ?? Settings.Instance.MaxDimension;
+        var maxDim = (await new MaxDimDialog { AllowCancel=false }.ShowAsync(main)) ?? Settings.Instance.MaxDimension;
         foreach (var file in fileArgs.Files)
         {
             await RotateWindow.ShowForStorageItemAsync(file, maxDim, main);

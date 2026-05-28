@@ -30,7 +30,8 @@ public partial class RotateWindow : StandardWindow
         try
         {
             image = new BackEndImage();
-            await image.LoadAsync(item.Path.GetComponents(UriComponents.Path, UriFormat.Unescaped));
+            var path = item.Path.GetComponents(UriComponents.Path|UriComponents.KeepDelimiter, UriFormat.Unescaped);
+            await image.LoadAsync(path);
             var scaled = await image.ScaleMapColorAsync((int) maxDim);
             image.DisposeIfDifferentFrom(scaled);
             image = scaled;
