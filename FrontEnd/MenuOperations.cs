@@ -117,7 +117,7 @@ static class MenuOperations
         }
         try
         {
-            await rotateWindow.Image.SaveAsync(file.Path.AbsolutePath, (int) quality);
+            await rotateWindow.Image.SaveAsync(file.Path.GetComponents(UriComponents.Path, UriFormat.Unescaped), (int) quality);
             rotateWindow.Close();
         }
         catch (Exception e)

@@ -73,7 +73,7 @@ public partial class SettingsDialog : Window
         {
             return;  // user cancelled
         }
-        OutputTo.Text = folders[0].Path.AbsolutePath;
+        OutputTo.Text = folders[0].Path.GetComponents(UriComponents.Path, UriFormat.Unescaped);
     }
 
     private async void OnClosing(object? sender, WindowClosingEventArgs e)
