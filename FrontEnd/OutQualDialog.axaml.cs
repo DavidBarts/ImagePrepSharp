@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using Avalonia.Controls;
 
-using ImagePrepSharp.Data;
-
 namespace ImagePrepSharp.FrontEnd;
 public partial class OutQualDialog : Window
 {

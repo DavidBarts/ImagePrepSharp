@@ -1,0 +1,83 @@
+#!/bin/ksh -p
+# This requires the output of a command of the form:
+# dotnet publish -r osx-arm64 -c Release
+# For more information, see:
+# https://avaloniaui.net/blog/the-definitive-guide-to-building-and-deploying-avalonia-applications-for-macos
+# https://docs.avaloniaui.net/docs/deployment/macos
+
+myname="${0##*/}"
+appname=ImagePrepSharp
+
+# Sanity checks
+for dir in bin package-files/osx
+do
+    if [ ! -d "$dir" ]
+    then
+        1>&2 echo "$myname: required directory '$dir' not found"
+        exit 1
+    fi
+done
+
+# Prompt for location of compiled files
+set -A dirs $(find bin/Release -name publish -type d -print | sort)
+if [ ${#dirs[@]} -eq 0 ]
+then
+    1>&2 echo "$myname: no publish directories found"
+    exit 1
+fi
+typeset -i response=-1
+typeset -i count=0
+while true
+do
+    count=0
+    for i in "${dirs[@]}"
+    do
+        echo "$count) $i"
+        let count+=1
+    done
+    echo -e "Select a source directory (enter its number): \c"
+    read response
+    if [ "$response" -lt 0 -o "$response" -ge ${#dirs[@]} ]
+    then
+        1>&2 echo "$myname: invalid response, try again"
+    else
+        break
+    fi
+done
+publish="${dirs[$response]}"
+
+# Prompt for version
+echo -e "Enter version for Info.plist: \c"
+read version
+
+# Get things ready
+if [ ! -d dist ]
+then
+    mkdir dist || exit 1
+fi
+bundle="dist/${appname}.app"
+if [ -d "$bundle" ]
+then
+    rm -rf "$bundle" || exit 1
+fi
+mkdir "$bundle" || exit 1
+
+# Build the app bundle
+mkdir "$bundle/Contents"
+sed -e "s/@app.version@/$version/" < package-files/osx/Info.plist > "$bundle/Contents/Info.plist"
+cp package-files/osx/PkgInfo "$bundle/Contents"
+mkdir "$bundle/Contents/MacOS"
+back="$(pwd)"
+cd "$bundle/Contents/MacOS" || exit 1
+targ="$(pwd)"
+cd "$back"
+cd "$publish" || exit 1
+tar cf - . | ( cd "$targ"; tar xBf - )
+cd "$back"
+mkdir "$bundle/Contents/Resources"
+cp package-files/osx/ImagePrepSharp.icns "$bundle/Contents/Resources"
+
+# AMF
+echo "Application bundle generated:"
+echo "$bundle:"
+ls -lR "$bundle"

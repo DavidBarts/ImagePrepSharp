@@ -3,6 +3,10 @@ namespace ImagePrepSharp.Data;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+
+[JsonSerializable(typeof(Settings))]
+internal partial class SourceGenerationContext : JsonSerializerContext { }
 
 // This does not use async I/O, because a) it is easier, and b) the settings
 // file is small and should load/save quickly. Hardware errors can violate
@@ -36,7 +40,7 @@ public class Settings
         if (File.Exists(FILE_NAME))
         {
             using var stream = File.Open(FILE_NAME, FileMode.Open, FileAccess.Read);
-            return JsonSerializer.Deserialize<Settings>(stream)!;
+            return JsonSerializer.Deserialize(stream, SourceGenerationContext.Default.Settings)!;
         }
         else
         {
@@ -51,7 +55,7 @@ public class Settings
             Directory.CreateDirectory(Files.DIRECTORY);
         }
         using var stream = File.Open(FILE_NAME, FileMode.Create, FileAccess.Write);
-        JsonSerializer.Serialize(stream, this);
+        JsonSerializer.Serialize(stream, this, SourceGenerationContext.Default.Settings);
     }
 }
 

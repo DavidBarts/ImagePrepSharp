@@ -77,8 +77,7 @@ public partial class RotateWindow : StandardWindow
     protected void OnClosing(object? sender, WindowClosingEventArgs e)
     {
         Image.Dispose();
-        var displayed = ImageDisplay.Source;
-        if (displayed is IDisposable disp)
+        if (ImageDisplay.Source is IDisposable disp)
         {
             disp.Dispose();
         }

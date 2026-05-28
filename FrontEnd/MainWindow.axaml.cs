@@ -28,7 +28,7 @@ public partial class MainWindow : StandardWindow
                 var maxDim = (await new MaxDimDialog().ShowAsync(this)) ?? Settings.Instance.MaxDimension;
                 foreach (var file in files)
                 {
-                    await RotateWindow.ShowForStorageItemAsync(file, (int) maxDim, this);
+                    await RotateWindow.ShowForStorageItemAsync(file, maxDim, this);
                 }
             }
         }
