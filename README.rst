@@ -54,7 +54,11 @@ JPEG or WebP format for sharing online.
 Installing
 ----------
 
-(This section is incomplete.)
+This is incomplete. Right now, there is a ``make-mac-app`` script that
+builds a Mac application bundle (read the comments at the start of the
+script). I hope to get something better, that supports more target
+platforms (probably something involving
+`Parcel <https://avaloniaui.net/parcel>`_), soon.
 
 One thing of note is Magick.NET. It’s mostly written in C++ and compiled
 to machine code. As such, the NuGet package you need depends on your
