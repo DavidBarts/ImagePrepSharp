@@ -7,6 +7,11 @@
 
     <Application.Styles>
         <FluentTheme />
+        <OnPlatform>
+            <OnPlatform.macOS>
+                <StyleInclude Source="/Assets/SanFranciscoFont.axaml"/>
+            </OnPlatform.macOS>
+        </OnPlatform>
     </Application.Styles>
 
     <NativeMenu.Menu>

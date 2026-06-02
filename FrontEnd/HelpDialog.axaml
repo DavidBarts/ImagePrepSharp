@@ -30,6 +30,7 @@
             <Run Classes="Subheader">Configuration File</Run>
             <LineBreak /> <LineBreak />
             <Run x:Name="ConfigFilePath" />
+            <LineBreak /> <LineBreak />
         </SelectableTextBlock>
      </StackPanel>
 </Window>

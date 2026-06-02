@@ -10,13 +10,13 @@
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="10" Margin="20">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
-            <TextBlock VerticalAlignment="Center">Default maximum dimension:</TextBlock>
+            <Label VerticalAlignment="Center" Target="MaxDimension">Default maximum dimension:</Label>
             <local:MaxDimSpinner x:Name="MaxDimension" VerticalAlignment="Center" />
-            <TextBlock VerticalAlignment="Center">&#160;&#160;Default output quality:</TextBlock>
+            <Label VerticalAlignment="Center" Target="OutputQuality">&#160;&#160;Default output quality:</Label>
             <local:OutQualSpinner x:Name="OutputQuality" VerticalAlignment="Center" />
         </StackPanel>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" ColumnSpacing="10" HorizontalAlignment="Stretch">
-            <TextBlock Grid.Column="0" VerticalAlignment="Center">Output filename suffix:</TextBlock>
+            <Label Grid.Column="0" VerticalAlignment="Center" Target="OutputSuffix">Output filename suffix:</Label>
             <TextBox Grid.Column="1" x:Name="OutputSuffix" AcceptsReturn="False" TextWrapping="NoWrap" HorizontalAlignment="Stretch" />
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
