@@ -2,21 +2,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ImagePrepSharp.FrontEnd.HelpDialog"
         Title="ImagePrepSharp Help"
-        Width="400" SizeToContent="Height"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         CanResize="False"
         ShowInTaskbar="False">
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="10" Margin="20">
-        <SelectableTextBlock HorizontalAlignment="Left" TextWrapping="Wrap" LineHeight="14">
+        <ScrollViewer Width="512" Height="663">
+        <SelectableTextBlock HorizontalAlignment="Left" TextWrapping="Wrap" LineHeight="14" FontSize="12" Foreground="#A1A1AA" LetterSpacing="0.5">
             <SelectableTextBlock.Styles>
                 <Style Selector="Run.Header">
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="FontSize" Value="18" />
+                    <Setter Property="Foreground" Value="#EDEDEF" />
                 </Style>
                 <Style Selector="Run.Subheader">
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Foreground" Value="#EDEDEF" />
+                </Style>
+                <Style Selector="Run.Code">
+                    <OnPlatform>
+                        <OnPlatform.macOS>
+                            <Setter Property="FontFamily" Value="Menlo"/>
+                        </OnPlatform.macOS>
+                        <OnPlatform.Linux>
+                            <Setter Property="FontFamily" Value="Ubuntu Mono"/>
+                        </OnPlatform.Linux>
+                        <OnPlatform.Windows>
+                            <Setter Property="FontFamily" Value="Consolas"/>
+                        </OnPlatform.Windows>
+                    </OnPlatform>
+                </Style>
+                <Style Selector="Run.Bold">
+                    <Setter Property="FontWeight" Value="Bold" />
                 </Style>
             </SelectableTextBlock.Styles>
             <Run Classes="Header">Using This Program</Run>
@@ -27,10 +46,30 @@
             <LineBreak /> <LineBreak />
             3. Either write out the file and close it using File… Save &amp; Close, or discard your edits using File… Discard.
             <LineBreak /> <LineBreak />
+            <Run Classes="Subheader">Settings</Run>
+            <LineBreak /> <LineBreak />
+            Most of what this program does is controlled by various settings.
+            <LineBreak /> <LineBreak />
+            <Run Classes="Bold">Default maximum dimension.</Run>
+            This sets the default value for the maximum dimension choice. When an image is loaded, both its width and its height (in pixels) are compared to the maximum dimension. If either is greater, the image is proportionally downsampled using the Lanczos 3 algorithm so as to fit within this constraint.
+            <LineBreak /> <LineBreak />
+            <Run Classes="Bold">Output filename suffix.</Run>
+            When saving, a default filename will be suggested. The suggested name will be the input name (sans extension), plus this suffix, with an extension corresponding to the chosen default output type (q.v.). If the suffix contains <Run Classes="Code">{0}</Run> or <Run Classes="Code">{1}</Run>, those sequences will be replaced by the width and the height respectively of the output file. For example, for an output type of JPEG, an output suffix of <Run Classes="Code">_{0}x{1}</Run> and an input file of <Run Classes="Code">IMG_1234.JPG</Run>, the suggested output filename would be something like <Run Classes="Code">IMG_1234_640x480.jpeg</Run>.
+            <LineBreak /> <LineBreak />
+            <Run Classes="Bold">Default output quality.</Run>
+            Both JPEG and WebP images are stored in a compressed form. The compression is lossy; i.e. a compressed image is not 100% identical to the original (the compression is, however, engineered so that the differences are typically hard to spot). Output quality controls how much this compression is permitted to alter the image, and runs from 1 (least faithful) to 100 (most faithful).
+            <LineBreak /> <LineBreak />
+            <Run Classes="Bold">Default output location.</Run>
+            Depending on the configuration, the file chooser for saving will open up in either the directory containing the input file, or in the specified output directory.
+            <LineBreak /> <LineBreak />
+            <Run Classes="Bold">Default output type.</Run>
+            This controls the default extension (and by implication the default image file format) for the output file.
+            <LineBreak /> <LineBreak />
             <Run Classes="Subheader">Configuration File</Run>
             <LineBreak /> <LineBreak />
             <Run x:Name="ConfigFilePath" />
             <LineBreak /> <LineBreak />
         </SelectableTextBlock>
-     </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
 </Window>

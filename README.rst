@@ -4,8 +4,6 @@ ImagePrepSharp
 Introduction
 ------------
 
-**NOTE:** This project is very much a work in progress right now.
-
 This is a C#/Avalonia port of the ImagePrep utility I wrote in Kotlin in
 2020, whose source code is self-hosted elsewhere (I will not link it
 here because abusive crawling from AI bots has crashed my site more than
@@ -70,19 +68,50 @@ for Magick.NET has a list of the packages available. Note that an 8-bit
 Running
 -------
 
-It should be mostly self-explanatory; this is not a complex program. One
-can open image files either from the menu at top, or via dragging them
-onto the main window. Rotation, if needed, is accomplished by three
-buttons in an editing window.  Saving is via the menu at top. Nothing is
-done to stop you from exiting with unsaved image changes, because the
-image editing options offered are so simple (limited to rotation) that
-it did not seem worthwhile.
+It should be mostly self-explanatory; this is not a complex program.
 
-A number of settings control the default operation of this program;
-these may be adjusted via a settings dialog brought up via the top menu.
-Of particular note here is that the output suffix can contain ``{0}``
-and ``{1}`` sequences, which will be replaced by the width and height
-of the image respectively.
+#. Open the image using File… Open & Scale. As this command’s name
+   implies, it will also scale the file to a maximum of 640 (or whatever
+   the defined maximum is) pixels in either dimension, preserving its
+   aspect ratio.
+#. Rotate the image as needed.
+#. Either write out the file and close it using File… Save & Close, or
+   discard your edits using File… Discard.
+
+Settings
+^^^^^^^^
+
+Most of what this program does is controlled by various settings.
+
+**Default maximum dimension.** This sets the default value for the maximum
+dimension choice. When an image is loaded, both its width and its height
+(in pixels) are compared to the maximum dimension. If either is greater,
+the image is proportionally downsampled using the Lanczos 3 algorithm so
+as to fit within this constraint.
+
+**Output filename suffix.** When saving, a default filename will be
+suggested. The suggested name will be the input name (sans extension),
+plus this suffix, with an extension corresponding to the chosen default
+output type (q.v.). If the suffix contains ``{0}`` or ``{1}``, those
+sequences will be replaced by the width and the height respectively of
+the output file. For example, for an output type of JPEG, an output
+suffix of ``_{0}x{1}`` and an input file of ``IMG_1234.JPG``, the
+suggested output filename would be something like
+``IMG_1234_640x480.jpeg``.
+
+**Default output quality.** Both JPEG and WebP images are stored in a
+compressed form. The compression is lossy; i.e. a compressed image is
+not 100% identical to the original (the compression is, however,
+engineered so that the differences are typically hard to spot). Output
+quality controls how much this compression is permitted to alter the
+image, and runs from 1 (least faithful) to 100 (most faithful).
+
+**Default output location.** Depending on the configuration, the file
+chooser for saving will open up in either the directory containing the
+input file, or in the specified output directory.
+
+**Default output type.** This controls the default extension (and by
+implication the default image file format) for the output file.
 
 Why Not MVVM?
 -------------

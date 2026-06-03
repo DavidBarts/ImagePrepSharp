@@ -3,6 +3,7 @@ using System;
 using Serilog;
 
 using ImagePrepSharp.Data;
+using Avalonia.Media;
 
 namespace ImagePrepSharp;
 
@@ -21,6 +22,26 @@ sealed class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
+            .WithSystemFonts()
             .UsePlatformDetect()
             .LogToTrace();
+}
+
+public static class AppBuilderExtensions
+{
+    extension(AppBuilder builder)
+    {
+        public AppBuilder WithSystemFonts()
+        {
+            if (OperatingSystem.IsMacOS())
+            {
+                return builder.With(new FontManagerOptions { DefaultFamilyName = ".AppleSystemUIFont" });
+            }
+            if (OperatingSystem.IsWindows())
+            {
+                return builder.With(new FontManagerOptions { DefaultFamilyName = "Segoe UI" });
+            }
+            return builder;
+        }
+    }
 }
