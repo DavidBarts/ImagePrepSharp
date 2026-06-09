@@ -1,0 +1,15 @@
+Package: imageprep
+Version: @app.version@
+Architecture: all
+Installed-Size: @deb.installed.size@
+Recommends: default-jre | openjdk-8-jre
+Suggests: default-jdk | openjdk-8-jdk
+Filename: @deb.repository.file@
+Size: @deb.size@
+MD5sum: @deb.md5@
+SHA1: @deb.sha1@
+SHA256: @deb.sha256@
+Section: contrib/graphics
+Homepage: http://notyouraveragetechie.com/ImagePrep.html
+Priority: optional
+Description: Prepare photos for sharing on social media.

@@ -1,0 +1,13 @@
+Package: imageprepsharp
+Version: @app.version@
+Architecture: all
+Section: contrib/graphics
+Homepage: http://notyouraveragetechie.com/ImagePrep.html
+Recommends: default-jre | openjdk-8-jre
+Build-depends: default-jdk | openjdk-8-jdk, ant
+Suggests: default-jdk | openjdk-8-jdk
+Priority: optional
+Installed-Size: @deb.installed.size@
+Description: Prepare photos for sharing on social media.
+ This dummy line here to make lintian happy.
+Maintainer: David Barts <opensource@bartsent.com>

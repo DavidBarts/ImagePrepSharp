@@ -1,0 +1,2 @@
+?package(imageprep):needs="X11" section="Contrib/Graphics" \
+  title="ImagePrep" command="/usr/bin/imageprep"

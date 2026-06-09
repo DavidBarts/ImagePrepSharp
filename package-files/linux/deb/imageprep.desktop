@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=ImagePrep
+GenericName=Image Preparer
+Comment=Resize, rotate, generate clean, metadata-free JPEG
+Exec=imageprep
+Icon=imageprep
+Terminal=false
+Type=Application
+Categories=Graphics;Photography;Security;
+StartupNotify=true
+StartupWMClass=imageprep
+Keywords=Photo;Resize;Rotate;JPEG;Privacy
