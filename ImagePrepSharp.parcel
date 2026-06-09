@@ -1,0 +1,35 @@
+{
+    "GeneralSettings": {
+        "NetProjectPath": "ImagePrepSharp.csproj",
+        "ApplicationName": "ImagePrepSharp",
+        "Version": "0.3.1",
+        "PackageName": {
+            "$type": "msbuild",
+            "property": "AssemblyName"
+        },
+        "AssemblyName": {
+            "$type": "msbuild",
+            "property": "AssemblyName"
+        }
+    },
+    "LinuxSettings": {
+        "CreateBinSymlink": "True"
+    },
+    "Win32Settings": {
+        "IncludeUninstaller": "True"
+    },
+    "MacOsSettings": {
+        "CreateBundle": true,
+        "BundleIdentifier": "name.blackcap.ImagePrepSharp",
+        "BundleCategory": "Photography",
+        "Permissions": {
+            "Documents": "This application needs access to your Documents folder to save and open files."
+        },
+        "AppIcon": "package-files/osx/ImagePrepSharp.icns",
+        "SigningCredentialsType": "AdHoc"
+    },
+    "PublishSettings": {
+        "PublishSingleFile": "True",
+        "ExtraBuildProperties": {}
+    }
+}

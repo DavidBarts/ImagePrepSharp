@@ -52,11 +52,23 @@ JPEG or WebP format for sharing online.
 Installing
 ----------
 
-This is incomplete. Right now, there is a ``make-mac-app`` script that
-builds a Mac application bundle (read the comments at the start of the
-script). I hope to get something better, that supports more target
-platforms (probably something involving
-`Parcel <https://avaloniaui.net/parcel>`_), soon.
+The easiest thing is to use
+`Parcel <https://docs.avaloniaui.net/tools/parcel/setup>`_. It can make
+a standard, clickable application for most desktop environments.
+
+If you are installing on a Mac, there is an ``Info.plist`` file that
+registers ImagePrepSharp as an editor for most image file formats; this
+makes editing images quite a bit easier (you can, for example, request
+that the standard Apple Photos app use ImagePrepSharp to edit an image).
+There is also an ``Image.parcel`` file ready to use. As an alternative,
+you can run the ``make-mac-app`` script to make a Mac application
+bundle.
+
+If you are installing on Linux, check out the ``package-files/linux``
+directory for an icon and other Linux-related files. I currently lack
+access to desktop systems other than this Mac, and contributions from
+others for getting things more supported for Linux and Windows would
+be most appreciated.
 
 One thing of note is Magick.NET. It’s mostly written in C++ and compiled
 to machine code. As such, the NuGet package you need depends on your
