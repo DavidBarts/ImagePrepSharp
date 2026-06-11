@@ -29,7 +29,10 @@ assumed that the horizontal dimension will always be horizontal
 Even if your browser displays such images properly, the web site the
 image is uploaded to can also come into play. Many of these sites
 postprocess the images you upload to them, and the postprocessing they
-run is not always aware of the image orientation information.
+run is not always aware of the image orientation information. So even
+a file that you can load and display correctly locally in your web
+browser can suddenly appear sideways or upside-down after you upload
+it!
 
 The Solution
 ------------

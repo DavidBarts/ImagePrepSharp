@@ -52,7 +52,7 @@ JPEG or WebP format for sharing online.
 And when you share it, the picture will always show right side up. No
 more surprises with unexpected sideways or upside-down images that
 looked just fine on your computer. (If you are curious why this sometimes
-happens, click `here <sideways>`_.)
+happens, click `here <sideways.rst>`_.)
 
 Installing
 ----------
