@@ -13,9 +13,9 @@ lowest-common-denominator format that will work with any software.
 The Details
 -----------
 
-Modern cameras contain sensors that tell their on-board computers which
-way the camera is being held. When it captures an image, the camera
-records which way it was oriented (portrait or landscape) in the
+Many digital cameras contain sensors that tell their on-board computers
+which way the camera is being held. When it captures an image, the
+camera records which way it was oriented (portrait or landscape) in the
 resulting file, but it always writes the image data itself in landscape
 (larger dimension horizontal) format.
 
