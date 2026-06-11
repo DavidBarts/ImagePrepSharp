@@ -1,13 +1,12 @@
 Package: imageprepsharp
-Version: @app.version@
+Version: 0.3
 Architecture: all
 Section: contrib/graphics
-Homepage: http://notyouraveragetechie.com/ImagePrep.html
-Recommends: default-jre | openjdk-8-jre
-Build-depends: default-jdk | openjdk-8-jdk, ant
-Suggests: default-jdk | openjdk-8-jdk
+Homepage: https://github.com/DavidBarts/ImagePrepSharp
+Recommends: dotnet-runtime-10.0 dotnet-host-10.0 dotnet-hostfxr-10.0 dotnet-templates-10.0
+Build-depends: dotnet-sdk-10.0 dotnet-sdk-aot-10.0
 Priority: optional
-Installed-Size: @deb.installed.size@
-Description: Prepare photos for sharing on social media.
+Installed-Size: REPLACE_WITH_ACTUAL_SIZE
+Description: Prepare photos for sharing via web, email, or social media.
  This dummy line here to make lintian happy.
-Maintainer: David Barts <opensource@bartsent.com>
+Maintainer: David Barts <invalid@example.com>
