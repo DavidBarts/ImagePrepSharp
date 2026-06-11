@@ -49,6 +49,11 @@ Then it displays the image and lets you rotate it so it is right side
 up, if needed. After possibly rotating the image, the it can be saved in
 JPEG or WebP format for sharing online.
 
+And when you share it, the picture will always show right side up. No
+more surprises with unexpected sideways or upside-down images that
+looked just fine on your computer. (If you are curious why this sometimes
+happens, click `here <sideways>`_.)
+
 Installing
 ----------
 
@@ -62,7 +67,9 @@ makes editing images quite a bit easier (you can, for example, request
 that the standard Apple Photos app use ImagePrepSharp to edit an image).
 There is also an ``Image.parcel`` file ready to use. As an alternative,
 you can run the ``make-mac-app`` script to make a Mac application
-bundle.
+bundle. If you choose the latter option, reading
+`this <https://avaloniaui.net/blog/the-definitive-guide-to-building-and-deploying-avalonia-applications-for-macos>`_
+should be helpful.
 
 If you are installing on Linux, check out the ``package-files/linux``
 directory for an icon and other Linux-related files. I currently lack
