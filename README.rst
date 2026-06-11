@@ -88,6 +88,12 @@ hardware and operating system. The
 for Magick.NET has a list of the packages available. Note that an 8-bit
 (Q8) package without HDRI support is sufficient.
 
+Installing on a Mac
+^^^^^^^^^^^^^^^^^^^
+
+Since I used a Mac to code and build this, I have included both arm64
+and x64 app bundles in the ``dist`` subdirectory.
+
 Running
 -------
 
