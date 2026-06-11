@@ -77,6 +77,10 @@ access to desktop systems other than this Mac, and contributions from
 others for getting things more supported for Linux and Windows would
 be most appreciated.
 
+It should not be necessary to purchase the Plus or Pro versions of
+Avalonia; this program is small enough to easily fit within the size
+limitations of the Community version.
+
 One thing of note is Magick.NET. It’s mostly written in C++ and compiled
 to machine code. As such, the NuGet package you need depends on your
 hardware and operating system. The
