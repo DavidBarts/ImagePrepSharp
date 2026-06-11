@@ -22,9 +22,9 @@ resulting file, but it always writes the image data itself in landscape
 It is considered the responsibility of any program that displays images
 to read the orientation information and use it to display the image
 properly, by automatically rotating things if needed. Historically, many
-web browsers in failed to read the orientation information; they simply
-assumed that the horizontal dimension will always be horizontal
-(because, prior to the new feature, it was).
+web browsers in particular failed to read the orientation information;
+they simply assumed that the horizontal dimension will always be
+horizontal (because, prior to the new feature, it was).
 
 Even if your browser displays such images properly, the web site the
 image is uploaded to can also come into play. Many of these sites
